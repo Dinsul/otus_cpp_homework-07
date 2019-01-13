@@ -3,7 +3,7 @@ compiler: clang
 dist: xenial
 before_script:
 - sudo apt update
-- sudo apt install libboost-test-dev -y
+- sudo apt install libboost-test-dev doxygen graphviz -y
 script:
 - conan install . --build missing
 - cmake .
