@@ -16,17 +16,20 @@ public:
 
     std::string text;
     bool is_end;
-    std::list<std::shared_ptr<RadixNode>> children;
+    std::list<std::unique_ptr<RadixNode>> children;
+
+    RadixNode &operator = (RadixNode &&other);
 };
+
 
 //!
 //! \brief Базисное дерево
 //!
 class RadixTree{
-    std::shared_ptr<RadixNode> _head; //!< Головной узел с данными
+    std::unique_ptr<RadixNode> _head; //!< Головной узел с данными
 
-    void add(std::shared_ptr<RadixNode> &node, const std::string &text);
-    inline void pushChild(std::shared_ptr<RadixNode> &node, const std::string &text);
+    void add(RadixNode &node, const std::string &text);
+    inline void pushChild(RadixNode &node, const std::string &text);
 
 public:
     RadixTree();
@@ -37,10 +40,10 @@ public:
     void printMinP(void);
     bool find(const std::string &text);
 
-    static void remove(std::shared_ptr<RadixNode> &node, const std::string::const_iterator &begin, const std::string::const_iterator &end);
-    static void printTree(const std::shared_ptr<RadixNode> &node, std::string fill);
-    static void printMinP(const std::shared_ptr<RadixNode> &node, std::string nickname, std::string minP);
-    static bool find(std::shared_ptr<RadixNode> &node, const std::string::const_iterator &begin, const std::string::const_iterator &end);
+    static void remove(RadixNode &node, const std::string::const_iterator &begin, const std::string::const_iterator &end);
+    static void printTree(const RadixNode &node, std::string fill);
+    static void printMinP(const RadixNode &node, std::string nickname, std::string minP);
+    static bool find(RadixNode &node, const std::string::const_iterator &begin, const std::string::const_iterator &end);
 
 };
 
